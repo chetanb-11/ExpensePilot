@@ -1,1 +1,1 @@
-# ExpensePilot
+# ExpensePilot, a pilot to your expenses
