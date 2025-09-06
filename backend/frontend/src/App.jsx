@@ -40,18 +40,18 @@ function App() {
 
             <div className="container">
                 <main in className="main-content">
-                    <div className="small-card">
+                    <div className="small-card div1">
                         Total Balance: {totalAmount}<>...........</>
                         Total Income: ₹{incomeTotal}
                         <>...........</>
                         Total Spending: ₹{expenseTotal}
                     </div>
-                    <div className="card">
+                    <div className="card div2">
                         <AddExpense onExpenseAdded={handleExpenseAdded} />
                         <hr style={{ margin: '2rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
                         <ExpenseList transaction={transaction} setTransaction={setTransaction} loading={loading} />
                     </div>
-                    <div className="card">
+                    <div className="card div3">
                         <ExpenseCharts transaction={transaction} />
                     </div>
                 </main>

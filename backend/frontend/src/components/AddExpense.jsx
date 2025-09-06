@@ -169,13 +169,9 @@ const AddExpense = ({ onExpenseAdded }) => {
                     onChange={handleChange}
                 >
                     <option value="">Select Category</option>
-                    <option value="food">Food</option>
-                    <option value="cafe">Cafe</option>
-                    <option value="fees">Fees</option>
-                    <option value="trip">Trip</option>
-                    <option value="friends">Friends</option>
-                    <option value="girlfriend">Girlfriend</option>
-                    <option value="other">Other</option>
+                    <option value="salary">Salary</option>
+                    <option value="loan">Loan</option>
+
                 </select>
             </div>
             <button type="submit" disabled={loading}>
@@ -187,11 +183,11 @@ const AddExpense = ({ onExpenseAdded }) => {
     <div className="add-expense-container">
         <button className={`tab ${activeTab === 'expenseAdd' ? 'active' : ''}`} onClick={() => {
             setActiveTab('expenseAdd')
-            setFormData(prev => ({ ...prev, type: 'expense' }))
+            setFormData(prev => ({ ...prev, type: 'Expense' }))
         }}>Add Expense</button>
         <button className={`tab ${activeTab === 'incomeAdd' ? 'active' : ''}`} onClick={() => {
             setActiveTab('incomeAdd');
-            setFormData(prev => ({ ...prev, type: 'income' }));
+            setFormData(prev => ({ ...prev, type: 'Income' }));
         }}>Add Income</button>
       {error && <div className="error-message">{error}</div>}
 

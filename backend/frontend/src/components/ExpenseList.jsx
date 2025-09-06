@@ -40,7 +40,7 @@ const ExpenseList = ({ transaction, setTransaction, loading }) => {
                             <p className="expense-date">{expense.date}</p>
                         </div>
                         <div className="expense-right">
-                            <p className="expense-amount">${expense.amount.toFixed(2)}</p>
+                            <p className="expense-amount" style={expense.type == "Income"?{color: "green"}:{color: "red"}}>₹{expense.amount.toFixed(2)}</p>
                             {expense.category && <span className="expense-category">{expense.category}</span>}
                             {/* <button
                                 className="delete-btn"
