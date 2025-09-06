@@ -27,9 +27,12 @@ public class ExpenseService {
         return expenseRepo.findAll();
     }
 
-    public boolean deleteExpense(int id) {
+    public void deleteExpense(int id) {
         expenseRepo.deleteById(id);
-        return false;
+    }
+
+    public Expense getExpenseById(int id) {
+        return expenseRepo.findById(id).orElse(null);
     }
 
 //    public void deleteExpense(int id) {

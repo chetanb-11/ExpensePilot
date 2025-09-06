@@ -1,12 +1,13 @@
-import { Calendar, DollarSign, TrendingUp, PieChart as PieChartIcon } from 'lucide-react';
+import { Calendar, IndianRupee, TrendingUp, PieChart as PieChartIcon } from 'lucide-react';
 import './StatsCards.css';
 
 const StatsCards = ({ totalAmount, expenseCount, avgAmount, categoryCount }) => {
     const stats = [
         {
-            icon: <DollarSign size={24} />,
+            icon: <IndianRupee size={24} />,
+            
             label: 'Total Spent',
-            value: `$${totalAmount.toFixed(2)}`,
+                value: `₹${totalAmount.toFixed(2)}`,
             color: 'green'
         },
         {
@@ -18,7 +19,7 @@ const StatsCards = ({ totalAmount, expenseCount, avgAmount, categoryCount }) => 
         {
             icon: <TrendingUp size={24} />,
             label: 'Average Expense',
-            value: `$${avgAmount.toFixed(2)}`,
+                value: `₹${avgAmount.toFixed(2)}`,
             color: 'orange'
         },
         {

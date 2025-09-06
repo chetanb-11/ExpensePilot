@@ -3,6 +3,7 @@ package com.project.expensepilot.controller;
 import com.project.expensepilot.model.Expense;
 import com.project.expensepilot.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +33,25 @@ public class ExpenseController {
 
     @DeleteMapping("/expense/{id}")
     public ResponseEntity<Void> deleteExpense(@PathVariable int id) {
-        boolean deleted = expenseService.deleteExpense(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
+        Expense existingExpense = expenseService.getExpenseById(id);
+        if (existingExpense != null) {
+            expenseService.deleteExpense(id);
+            return new ResponseEntity<>(HttpStatus.valueOf(200));
+        }
+        return new ResponseEntity<>(HttpStatus.valueOf(404));
+    }
+
+    @PutMapping("/expense/{id}")
+    public ResponseEntity<Expense> updateExpense(@PathVariable int id, @RequestBody Expense updatedExpense) {
+        Expense existingExpense = expenseService.getExpenseById(id);
+        if (existingExpense != null) {
+            updatedExpense.setId(id);
+            expenseService.addExpense(updatedExpense);
+            return ResponseEntity.ok(updatedExpense);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-
 
 //    @GetMapping("/expense/{id}")
 //    public Expense getExpenseById(@PathVariable int id) {

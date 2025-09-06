@@ -34,7 +34,13 @@ function App() {
             </header>
 
             <div className="container">
-                <main className="main-content">
+                <main in className="main-content">
+                    <div className="small-card">
+                        Total Balance: <>...........</>
+                        Total Income: ₹{expenses.filter(exp => exp.amount > 0).reduce((sum, exp) => sum + exp.amount, 0).toFixed(2)}
+                        <>...........</>
+                        Total Spending: ₹{expenses.filter(exp => exp.amount > 0).reduce((sum, exp) => sum + exp.amount, 0).toFixed(2)}
+                    </div>
                     <div className="card">
                         <AddExpense onExpenseAdded={handleExpenseAdded} />
                         <hr style={{ margin: '2rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />

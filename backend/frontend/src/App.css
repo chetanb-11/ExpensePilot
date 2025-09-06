@@ -1,45 +1,3 @@
-/** {*/
-/*  box-sizing: border-box;*/
-/*}*/
-
-/*body {*/
-/*  margin: 0;*/
-/*  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;*/
-/*  background-color: #f5f5f5;*/
-/*  color: #333;*/
-/*  line-height: 1.6;*/
-/*}*/
-
-/*#root {*/
-/*  min-height: 100vh;*/
-/*  background-color: #f5f5f5;*/
-/*}*/
-
-/*!* Form styling *!*/
-/*input {*/
-/*}*/
-
-/*.expense-card:hover {*/
-/*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);*/
-/*}*/
-
-/*!* Loading and error states *!*/
-/*.loading {*/
-/*  text-align: center;*/
-/*  padding: 2rem;*/
-/*  color: #666;*/
-/*  font-size: 18px;*/
-/*}*/
-
-/*.error {*/
-/*  background-color: #f8d7da;*/
-/*  color: #721c24;*/
-/*  padding: 0.75rem;*/
-/*  border-radius: 4px;*/
-/*  border: 1px solid #f5c6cb;*/
-/*}*/
-
-
 * {
     box-sizing: border-box;
 }
@@ -100,16 +58,27 @@ button:disabled {
 }
 
 /* Main content */
+/* Main content */
 .main-content {
     display: grid;
-    grid-template-columns: 1fr;
+    /* Adjust grid-template-columns for the new layout */
+    grid-template-columns: 1fr; /* Default for mobile */
     gap: 2rem;
     padding: 2rem;
 }
 
 @media (min-width: 1024px) {
     .main-content {
-        grid-template-columns: 3fr 2fr;
+        /* This creates a layout where the small-card spans two columns,
+           and the two 'card' elements are below it, each taking one column.
+           You might need to adjust this further based on exact desired proportions. */
+        grid-template-columns: 3fr 2fr; /* This was your old two-column layout */
+        grid-template-rows: auto 1fr; /* Add rows for the small card and then the larger cards */
+    }
+
+    /* To achieve the layout in Image 1, you'll need to specify how items span */
+    .main-content .small-card {
+        grid-column: 1 / -1; /* Make the small card span all columns */
     }
 }
 
@@ -126,6 +95,20 @@ button:disabled {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
+
+.small-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 100px; /* You had this in your code, assuming it's desired */
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    color: #4a90e2;
+    transition: all 0.2s ease;
+}
+
+/* ... rest of your CSS ... */
 
 /* Expense cards */
 .expense-card {
