@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddExpense.css';
 
 const AddExpense = ({ onExpenseAdded }) => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const AddExpense = ({ onExpenseAdded }) => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('http://localhost:8080/expense', {
+      const response = await fetch('http://localhost:8080/api/expense', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +45,6 @@ const AddExpense = ({ onExpenseAdded }) => {
         throw new Error('Failed to create expense');
       }
 
-      // Reset form
       setFormData({
         description: '',
         amount: '',
@@ -52,7 +52,6 @@ const AddExpense = ({ onExpenseAdded }) => {
         category: ''
       });
 
-      // Notify parent component to refresh the expense list
       if (onExpenseAdded) {
         onExpenseAdded();
       }
@@ -65,38 +64,13 @@ const AddExpense = ({ onExpenseAdded }) => {
   };
 
   return (
-    <div style={{ marginBottom: '2rem' }}>
+    <div className="add-expense-container">
       <h2>Add New Expense</h2>
-      {error && (
-        <div style={{
-          backgroundColor: '#f8d7da',
-          color: '#721c24',
-          padding: '0.75rem',
-          borderRadius: '4px',
-          border: '1px solid #f5c6cb',
-          marginBottom: '1rem'
-        }}>
-          {error}
-        </div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: 'grid',
-          gap: '1rem',
-          maxWidth: '400px',
-          textAlign: 'left',
-          background: 'white',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-        }}
-      >
-        <div>
-          <label htmlFor="description" style={{ fontWeight: '500', color: '#555' }}>
-            Description *
-          </label>
+      <form onSubmit={handleSubmit} className="add-expense-form">
+        <div className="form-group">
+          <label htmlFor="description">Description *</label>
           <input
             type="text"
             id="description"
@@ -104,45 +78,21 @@ const AddExpense = ({ onExpenseAdded }) => {
             value={formData.description}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginTop: '0.25rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
           />
         </div>
-
-        <div>
-          <label htmlFor="amount" style={{ fontWeight: '500', color: '#555' }}>
-            Amount *
-          </label>
+        <div className="form-group">
+          <label htmlFor="amount">Amount *</label>
           <input
             type="number"
             id="amount"
             name="amount"
             value={formData.amount}
             onChange={handleChange}
-            step="0.01"
-            min="0"
             required
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginTop: '0.25rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
           />
         </div>
-
-        <div>
-          <label htmlFor="date" style={{ fontWeight: '500', color: '#555' }}>
-            Date *
-          </label>
+        <div className="form-group">
+          <label htmlFor="date">Date *</label>
           <input
             type="date"
             id="date"
@@ -150,53 +100,27 @@ const AddExpense = ({ onExpenseAdded }) => {
             value={formData.date}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginTop: '0.25rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
           />
         </div>
-
-        <div>
-          <label htmlFor="category" style={{ fontWeight: '500', color: '#555' }}>
-            Category
-          </label>
-          <input
-            type="text"
+        <div className="form-group">
+          <label htmlFor="category">Category</label>
+          <select
             id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              marginTop: '0.25rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
-          />
+          >
+            <option value="">Select Category</option>
+            <option value="food">Food</option>
+            <option value="cafe">Cafe</option>
+            <option value="fees">Fees</option>
+            <option value="trip">Trip</option>
+            <option value="friends">Friends</option>
+            <option value="girlfriend">Girlfriend</option>
+            <option value="other">Other</option>
+          </select>
         </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            padding: '0.75rem',
-            backgroundColor: loading ? '#6c757d' : '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            fontSize: '16px',
-            fontWeight: '500',
-            transition: 'background-color 0.2s'
-          }}
-        >
+        <button type="submit" disabled={loading}>
           {loading ? 'Adding...' : 'Add Expense'}
         </button>
       </form>
@@ -205,3 +129,4 @@ const AddExpense = ({ onExpenseAdded }) => {
 };
 
 export default AddExpense;
+

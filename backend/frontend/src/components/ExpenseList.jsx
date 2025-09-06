@@ -1,63 +1,59 @@
-import { useState, useEffect } from 'react';
+import './ExpenseList.css';
 
-const ExpenseList = () => {
-  const [expenses, setExpenses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
-
-  const fetchExpenses = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('http://localhost:8080/expenses');
-      if (!response.ok) {
-        throw new Error('Failed to fetch expenses');
-      }
-      const data = await response.json();
-      setExpenses(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) return <div className="loading">Loading expenses...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
-
-  return (
-    <div style={{ marginBottom: '2rem' }}>
-      <h2>Expense List</h2>
-      {expenses.length === 0 ? (
-        <p>No expenses found. Add your first expense above!</p>
-      ) : (
-        <div style={{ display: 'grid', gap: '1rem' }}>
-          {expenses.map((expense) => (
-            <div
-              key={expense.id}
-              className="expense-card"
-              style={{
-                padding: '1rem',
-                textAlign: 'left',
-                background: 'white',
-                borderRadius: '8px',
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                border: '1px solid #e0e0e0'
-              }}
-            >
-              <h3 style={{ margin: '0 0 0.5rem 0', color: '#333' }}>{expense.description}</h3>
-              <p style={{ margin: '0.25rem 0' }}><strong>Amount:</strong> ${expense.amount}</p>
-              <p style={{ margin: '0.25rem 0' }}><strong>Date:</strong> {expense.date}</p>
-              {expense.category && <p style={{ margin: '0.25rem 0' }}><strong>Category:</strong> {expense.category}</p>}
+const ExpenseList = ({ expenses, loading }) => {
+    if (loading) return <div className="loading">Loading expenses...</div>;
+    if (!expenses || expenses.length === 0) {
+        return (
+            <div className="empty-state">
+                <h3>No Expenses Yet</h3>
+                <p>Add an expense using the form above to see it here.</p>
             </div>
-          ))}
+        );
+    }
+    function handleDelete(id) {
+        console.log("Deleting expense with id:", id); 
+        fetch(`http://localhost:8080/api/expense/${id}`, {
+            method: 'DELETE',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    if (onExpenseDeleted) {
+                        onExpenseDeleted(id);
+                    }
+                } else {
+                    alert('Failed to delete expense.');
+                }
+            })
+            .catch(() => {
+                alert('Error deleting expense.');
+            });
+    }
+
+    return (
+        <div className="expense-list-container">
+            <h2>Recent Expenses</h2>
+            <div className="expense-list">
+                {expenses.map((expense) => (
+                    <div key={expense.id} className="expense-item">
+                        <div className="expense-details">
+                            <h3 className="expense-description">{expense.description}</h3>
+                            <p className="expense-date">{expense.date}</p>
+                        </div>
+                        <div className="expense-right">
+                            <p className="expense-amount">${expense.amount.toFixed(2)}</p>
+                            {expense.category && <span className="expense-category">{expense.category}</span>}
+                            <button
+                                className="delete-btn"
+                                onClick={() => handleDelete(expense.id)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default ExpenseList;
