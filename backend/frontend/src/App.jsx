@@ -6,9 +6,10 @@ import ExpenseCharts from './components/ExpenseCharts';
 
 function App() {
     const [refreshKey, setRefreshKey] = useState(0);
-    const [expenses, setExpenses] = useState([]);
+    const [transaction, setTransaction] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [expenses, setExpenses] = useState(0);
+    const [income, setIncome] = useState(0);
     const handleExpenseAdded = () => {
         setRefreshKey(prev => prev + 1);
     };
@@ -18,7 +19,9 @@ function App() {
         fetch('http://localhost:8080/api/expenses')
             .then(res => res.json())
             .then(data => {
-                setExpenses(data);
+                setTransaction(data);
+                // Calculate totals and store as numbers
+
                 setLoading(false);
             })
             .catch(err => {
@@ -26,7 +29,9 @@ function App() {
                 setLoading(false);
             });
     }, [refreshKey]);
-
+    const totalAmount = transaction.reduce((sum, exp) => sum + parseFloat(exp.amount || 0), 0);
+    const expenseTotal = transaction.filter(exp => exp.type === "Expense").reduce((sum, exp) => sum + exp.amount, 0);
+    const incomeTotal = transaction.filter(exp => exp.type === "Income").reduce((sum, exp) => sum + exp.amount, 0);
     return (
         <>
             <header className="app-header">
@@ -36,18 +41,18 @@ function App() {
             <div className="container">
                 <main in className="main-content">
                     <div className="small-card">
-                        Total Balance: <>...........</>
-                        Total Income: ₹{expenses.filter(exp => exp.amount > 0).reduce((sum, exp) => sum + exp.amount, 0).toFixed(2)}
+                        Total Balance: {totalAmount}<>...........</>
+                        Total Income: ₹{incomeTotal}
                         <>...........</>
-                        Total Spending: ₹{expenses.filter(exp => exp.amount > 0).reduce((sum, exp) => sum + exp.amount, 0).toFixed(2)}
+                        Total Spending: ₹{expenseTotal}
                     </div>
                     <div className="card">
                         <AddExpense onExpenseAdded={handleExpenseAdded} />
                         <hr style={{ margin: '2rem 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
-                        <ExpenseList expenses={expenses} setExpenses={setExpenses} loading={loading} />
+                        <ExpenseList transaction={transaction} setTransaction={setTransaction} loading={loading} />
                     </div>
                     <div className="card">
-                        <ExpenseCharts expenses={expenses} />
+                        <ExpenseCharts transaction={transaction} />
                     </div>
                 </main>
             </div>

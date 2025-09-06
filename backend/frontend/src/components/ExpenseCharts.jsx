@@ -4,7 +4,7 @@ import { PieChart as PieChartIcon } from 'lucide-react';
 import StatsCards from './StatsCards';
 import './ExpenseCharts.css';
 
-const ExpenseCharts = ({ expenses }) => {
+const ExpenseCharts = ({ transaction }) => {
     const [activeTab, setActiveTab] = useState('overview');
 
     const categoryColors = {
@@ -17,11 +17,11 @@ const ExpenseCharts = ({ expenses }) => {
         other: '#74b9ff'
     };
 
-    const totalAmount = expenses.reduce((sum, exp) => sum + parseFloat(exp.amount || 0), 0);
-    const avgAmount = expenses.length > 0 ? totalAmount / expenses.length : 0;
-    const expenseCount = expenses.length;
+    const totalAmount = transaction.reduce((sum, exp) => sum + parseFloat(exp.amount || 0), 0);
+    const avgAmount = transaction.length > 0 ? totalAmount / transaction.length : 0;
+    const expenseCount = transaction.length;
 
-    const categoryData = expenses.reduce((acc, expense) => {
+    const categoryData = transaction.reduce((acc, expense) => {
         const category = expense.category || 'other';
         if (!acc[category]) {
             acc[category] = { name: category, value: 0, count: 0 };
@@ -37,7 +37,7 @@ const ExpenseCharts = ({ expenses }) => {
         color: categoryColors[item.name] || categoryColors.other
     }));
 
-    const dateData = expenses.reduce((acc, expense) => {
+    const dateData = transaction.reduce((acc, expense) => {
         const date = expense.date;
         if (!acc[date]) {
             acc[date] = 0;
@@ -92,7 +92,7 @@ const ExpenseCharts = ({ expenses }) => {
                                     <div className="category-color-box" style={{ backgroundColor: category.color }}></div>
                                     <div className="category-info">
                                         <strong>{category.name}</strong>
-                                        <span>{category.count} expenses • ${category.value.toFixed(2)}</span>
+                                        <span>{category.count} transaction • ${category.value.toFixed(2)}</span>
                                     </div>
                                 </div>
                             ))}
@@ -136,12 +136,12 @@ const ExpenseCharts = ({ expenses }) => {
         </div>
     );
 
-    if (expenses.length === 0) {
+    if (transaction.length === 0) {
         return (
             <div className="empty-chart-state">
                 <PieChartIcon size={64} />
                 <h3>No Data to Visualize</h3>
-                <p>Add some expenses to see beautiful charts and insights!</p>
+                <p>Add some transaction to see beautiful charts and insights!</p>
             </div>
         );
     }

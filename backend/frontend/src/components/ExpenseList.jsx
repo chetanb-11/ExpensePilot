@@ -1,11 +1,11 @@
 import './ExpenseList.css';
 
-const ExpenseList = ({ expenses, setExpenses, loading }) => {
-    if (loading) return <div className="loading">Loading expenses...</div>;
-    if (!expenses || expenses.length === 0) {
+const ExpenseList = ({ transaction, setTransaction, loading }) => {
+    if (loading) return <div className="loading">Loading transaction...</div>;
+    if (!transaction || transaction.length === 0) {
         return (
             <div className="empty-state">
-                <h3>No Expenses Yet</h3>
+                <h3>No Transaction Yet</h3>
                 <p>Add an expense using the form above to see it here.</p>
             </div>
         );
@@ -18,7 +18,7 @@ const ExpenseList = ({ expenses, setExpenses, loading }) => {
             .then((response) => {
                 if (response.status === 200 || response.status === 204) {
                     // Remove the deleted expense from the local state
-                    setExpenses((prev) => prev.filter((expense) => expense.id !== id));
+                    setTransaction((prev) => prev.filter((expense) => expense.id !== id));
                 } else {
                     alert('Failed to delete expense.');
                 }
@@ -31,9 +31,9 @@ const ExpenseList = ({ expenses, setExpenses, loading }) => {
 
     return (
         <div className="expense-list-container">
-            <h2>Recent Expenses</h2>
+            <h2>Recent Transaction</h2>
             <div className="expense-list">
-                {expenses.map((expense) => (
+                {transaction.map((expense) => (
                     <div key={expense.id} className="expense-item">
                         <div className="expense-details">
                             <h3 className="expense-description">{expense.description}</h3>
@@ -48,7 +48,7 @@ const ExpenseList = ({ expenses, setExpenses, loading }) => {
                             >
                                 Delete
                             </button> */}
-                            <button className="bin-button">
+                            <button className="bin-button" onClick={() => handleDelete(expense.id)}>
                                 <svg
                                     className="bin-top"
                                     viewBox="0 0 39 7"
@@ -84,6 +84,7 @@ const ExpenseList = ({ expenses, setExpenses, loading }) => {
                                     <path d="M12 6L12 29" stroke="white" stroke-width="4"></path>
                                     <path d="M21 6V29" stroke="white" stroke-width="4"></path>
                                 </svg>
+
                             </button>
 
                         </div>
