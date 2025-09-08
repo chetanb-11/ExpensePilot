@@ -35,6 +35,10 @@ public class ExpenseService {
         return expenseRepo.findById(id).orElse(null);
     }
 
+    public Expense updateExpense(Expense updatedExpense) {
+        return expenseRepo.save(updatedExpense);
+    }
+
 //    public void deleteExpense(int id) {
 //        expenses.removeIf(expense -> expense.getId() == id);
 //    }

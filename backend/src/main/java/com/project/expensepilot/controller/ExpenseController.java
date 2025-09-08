@@ -46,11 +46,10 @@ public class ExpenseController {
         Expense existingExpense = expenseService.getExpenseById(id);
         if (existingExpense != null) {
             updatedExpense.setId(id);
-            expenseService.addExpense(updatedExpense);
-            return ResponseEntity.ok(updatedExpense);
-        } else {
-            return ResponseEntity.notFound().build();
+            Expense savedExpense = expenseService.updateExpense(updatedExpense);
+            return new ResponseEntity<>(savedExpense, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 //    @GetMapping("/expense/{id}")
