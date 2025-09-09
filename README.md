@@ -25,19 +25,15 @@ ExpensePilot/
 ## ✨ Features
 
 ### Backend (Spring Boot)
-- **User Authentication** (optional): Secure login & registration
 - **Expense Management**: Add, edit, delete, and view expenses via REST API
 - **Category Tracking**: Organize expenses under custom categories
-- **Database Agnostic**: Default H2, supports MySQL/PostgreSQL
+- **Database Agnostic**: Default MySQL
 
 ### Frontend (Next.js by v0)
 - **Dashboard Overview**: Total income, expenses, net savings
 - **Transaction Management**: Add/view/manage transactions
 - **Category Breakdown**: Charts show spending by category
 - **Real-Time Data**: Fetches live data from backend API, with offline fallback
-- **Modern UI**: Responsive, dark/light mode, animated charts
-- **Theming**: next-themes for user preference
-- **Professional UX**: Built with Radix UI, Tailwind CSS
 
 ---
 
@@ -53,7 +49,6 @@ ExpensePilot/
 ### Frontend
 - Next.js 14 (App Router)
 - TypeScript
-- Tailwind CSS
 - Radix UI primitives, Lucide React icons
 - Recharts for charts
 - React Hook Form + Zod for validation
@@ -125,13 +120,6 @@ Fallback demo data included for offline/local development.
 
 Pull requests, issues, and feature suggestions are welcome!
 - Fork, clone, and submit PRs for either backend or frontend
-- All code is MIT licensed
-
----
-
-## 📄 License
-
-ExpensePilot is licensed under the MIT License.
 
 ---
 
