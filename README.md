@@ -1,6 +1,6 @@
 # ExpensePilot – Full Stack Expense Management
 
-ExpensePilot is a modern full-stack application for managing and tracking personal and business expenses. The backend is built with Spring Boot (Java & Maven), providing a REST API for all expense operations. The frontend dashboard is powered by Next.js (TypeScript), automatically generated and styled via [v0.app](https://v0.app) and deployed on Vercel, offering a beautiful, responsive UI.
+ExpensePilot is a modern full-stack application for managing and tracking personal and business expenses. The backend is built with Spring Boot (Java & Maven), providing a REST API for all expense operations. The frontend dashboard is powered by Next.js (TypeScript), automatically generated and styled via [v0.app](https://v0.app) and deployed on Vercel, offering a beautiful, responsive UI
 
 ---
 
