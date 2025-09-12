@@ -14,7 +14,16 @@ public class ExpenseController {
 
     @Autowired
     private ExpenseService expenseService;
+    
+    @PostMapping("/expense")
+    public void createExpense(@RequestBody Expense expense) {
+        expenseService.addExpense(expense);
+    }
 
+    @GetMapping("/expenses")
+    public Iterable<Expense> getExpenses() {
+        return expenseService.getAllExpenses();
+    }
 
     @DeleteMapping("/expense/{id}")
     public ResponseEntity<Void> deleteExpense(@PathVariable int id) {
