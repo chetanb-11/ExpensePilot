@@ -7,3 +7,6 @@ INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00
 INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Food', 'Dinner at a local restaurant', '2025-09-05');
 INSERT INTO expense (amount, type, category, description, date) VALUES (1000.00, 'Income', 'Investments', 'Dividend from stocks', '2025-09-05');
 INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Transport', 'Fuel for car', '2025-09-06');
+
+INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Entertainment', 'Movie tickets for two', '2025-09-06');
+INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Shopping', 'Bought new shoes', '2025-09-06');
