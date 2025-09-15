@@ -52,5 +52,19 @@
 - Ensured only one controller (`RootController`) handles the root path (`/`) to avoid Spring Boot mapping conflicts.
 - Kept API endpoints properly organized under `/api` prefix in `ExpenseController`.
 
+## 12. Fixed Spring Boot 3.x Compilation Errors in CustomErrorController
+- Issue: Build failed with compilation errors - `package javax.servlet.http does not exist` and `cannot find symbol: class HttpServletRequest`.
+- Root Cause: Spring Boot 3.x uses `jakarta.servlet` instead of `javax.servlet` (migration from Java EE to Jakarta EE).
+- Solution: Updated `CustomErrorController.java` imports:
+  - Changed `import javax.servlet.http.HttpServletRequest;` to `import jakarta.servlet.http.HttpServletRequest;`
+  - Updated servlet error attribute names from `javax.servlet.error.*` to `jakarta.servlet.error.*`
+- This ensures compatibility with Spring Boot 3.5.5 and resolves the Maven build compilation failure.
+
+## 13. Jakarta EE Migration Compatibility
+- Spring Boot 3.x requires Jakarta EE instead of Java EE namespace.
+- All servlet-related imports must use `jakarta.*` instead of `javax.*` packages.
+- This is a breaking change when upgrading from Spring Boot 2.x to 3.x.
+- The fix ensures the application builds successfully in Docker and deploys correctly on Render.com.
+
 ---
 **If you need more details or want to document additional changes, update this file accordingly.**
