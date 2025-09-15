@@ -54,3 +54,4 @@ ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+CMD ["java", "-jar", "app.jar"]
