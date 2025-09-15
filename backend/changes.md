@@ -36,5 +36,21 @@
 - Solution: Created a new `RootController.java` with a `@GetMapping("/")` endpoint to handle root requests and return a simple message. This ensures the root URL (`/`) responds with HTTP 200 and a message instead of a 404 error.
 - This keeps API endpoints under `/api` and the root endpoint separate for clarity.
 
+## 9. Custom Error Controller Implementation
+- Issue: The application showed "This application has no explicit mapping for /error" in the Whitelabel Error Page.
+- Solution: Created `CustomErrorController.java` that implements Spring Boot's `ErrorController` interface to handle all error scenarios properly.
+- This controller provides custom error messages for different HTTP status codes (404, 500, etc.) instead of the default Whitelabel Error Page.
+- The `/error` endpoint now returns meaningful error messages and proper HTTP status codes.
+
+## 10. Enhanced Root Controller
+- Updated `RootController.java` to include a `/status` endpoint for additional health checking.
+- Improved the root endpoint message to inform users about API endpoints being available at `/api/`.
+- Removed conflicting root endpoint from `ExpenseController.java` to prevent mapping conflicts.
+
+## 11. Controller Conflict Resolution
+- Removed the duplicate root endpoint method that was incorrectly added to `ExpenseController.java`.
+- Ensured only one controller (`RootController`) handles the root path (`/`) to avoid Spring Boot mapping conflicts.
+- Kept API endpoints properly organized under `/api` prefix in `ExpenseController`.
+
 ---
 **If you need more details or want to document additional changes, update this file accordingly.**

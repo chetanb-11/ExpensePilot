@@ -16,8 +16,8 @@ public class ExpenseController {
     private ExpenseService expenseService;
 
     @GetMapping("/")
-    public ResponseEntity<String> root() {
-        return new ResponseEntity<>("ExpensePilot backend is running!", HttpStatus.OK);
+    public String greet(){
+        return "Hello World! Welcome to my ExpensePilot";
     }
 
     @PostMapping("/expense")
