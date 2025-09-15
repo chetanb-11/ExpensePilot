@@ -16,10 +16,10 @@ public class ExpenseController {
     private ExpenseService expenseService;
 
 
-//    @RequestMapping("/")
-//    public String greet(){
-//        return "Hello World! Welcome to my ExpensePilot";
-//    }
+    @GetMapping("/")
+    public String greet(){
+        return "Hello World! Welcome to my ExpensePilot";
+    }
 
     @PostMapping("/expense")
     public void createExpense(@RequestBody Expense expense) {
@@ -40,6 +40,8 @@ public class ExpenseController {
         }
         return new ResponseEntity<>(HttpStatus.valueOf(404));
     }
+//int n = add(5, 3);
+//    int add(int a, int b){ return a + b}
 
     @PutMapping("/expense/{id}")
     public ResponseEntity<Expense> updateExpense(@PathVariable int id, @RequestBody Expense updatedExpense) {
