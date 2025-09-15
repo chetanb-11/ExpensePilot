@@ -39,8 +39,6 @@ public class ExpenseController {
         }
         return new ResponseEntity<>(HttpStatus.valueOf(404));
     }
-//int n = add(5, 3);
-//    int add(int a, int b){ return a + b}
 
     @PutMapping("/expense/{id}")
     public ResponseEntity<Expense> updateExpense(@PathVariable int id, @RequestBody Expense updatedExpense) {
@@ -52,9 +50,4 @@ public class ExpenseController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-//    @GetMapping("/expense/{id}")
-//    public Expense getExpenseById(@PathVariable int id) {
-//        return expenseService.getExpenseById(id);
-//    }
 }

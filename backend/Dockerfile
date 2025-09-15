@@ -17,7 +17,7 @@ RUN mvn dependency:go-offline -B
 # Copy source code
 COPY src src
 
-# Build the application
+# Build the application (skip tests to avoid database connection issues)
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create the runtime image
@@ -39,12 +39,18 @@ USER spring
 # Expose the port your Spring Boot app runs on
 EXPOSE 8080
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+# Health check (updated to remove dependency on actuator since it's not in pom.xml)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/ || exit 1
 
 # Set JVM options for better container performance
 ENV JAVA_OPTS="-Xms512m -Xmx1024m -XX:+UseG1GC -XX:+UseContainerSupport"
+
+# Default to H2 database configuration (can be overridden with environment variables)
+ENV SPRING_DATASOURCE_URL=jdbc:h2:mem:expensepilot
+ENV SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+ENV SPRING_H2_CONSOLE_ENABLED=true
+ENV SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 # Run the application
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
