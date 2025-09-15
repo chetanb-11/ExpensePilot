@@ -31,5 +31,10 @@
 - This is because there is no explicit mapping for `/` in the controller. The greeting endpoint is mapped to `/api/`.
 - To resolve this, added a root endpoint (`@GetMapping("/")`) in `ExpenseController.java` that returns a simple greeting message, so the root URL responds with HTTP 200 and a message instead of a 404 error.
 
+## 8. Root Whitelabel Error Page (404 Not Found)
+- Issue: Visiting `/` in the browser returned a Whitelabel Error Page because all endpoints in `ExpenseController` are prefixed with `/api` due to `@RequestMapping("/api")`.
+- Solution: Created a new `RootController.java` with a `@GetMapping("/")` endpoint to handle root requests and return a simple message. This ensures the root URL (`/`) responds with HTTP 200 and a message instead of a 404 error.
+- This keeps API endpoints under `/api` and the root endpoint separate for clarity.
+
 ---
 **If you need more details or want to document additional changes, update this file accordingly.**
