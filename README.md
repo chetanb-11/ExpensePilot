@@ -1,87 +1,126 @@
-# ExpensePilot, a pilot to your expenses
+# ExpensePilot – Full Stack Expense Management
 
-ExpensePilot is a full-stack application built with React (frontend) and Spring Boot (backend, using Maven) for managing and tracking expenses efficiently. This project demonstrates modern web development best practices, combining a responsive React user interface with a robust Spring Boot REST API backend.
-
-## Features
-
-- **User Authentication:** Secure login and registration functionality.
-- **Expense Management:** Add, edit, delete, and view expenses.
-- **Category Tracking:** Organize expenses under custom categories.
-- **Dashboard:** Visualize spending trends with charts and summaries.
-- **Responsive UI:** Works seamlessly on desktop and mobile devices.
-
-## Technology Stack
-
-### Frontend
-
-- [React](https://reactjs.org/)
-- CSS (custom styling)
-- [Axios](https://axios-http.com/) (for API requests)
-
-### Backend
-
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- [Maven](https://maven.apache.org/)
-- Java
-- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
-- [H2](https://www.h2database.com/) (default dev database, can swap for MySQL/PostgreSQL)
-
-## Project Structure
-ExpensePilot/ ├── backend/ # Spring Boot application (Java + Maven) │ ├── src/ │ └── pom.xml ├── frontend/ # React application │ ├── src/ │ └── package.json └── README.md
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js & npm
-- Java (JDK 11+ recommended)
-- Maven
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-    ```bash
-    cd backend
-    ```
-2. Build and run Spring Boot backend:
-    ```bash
-    mvn spring-boot:run
-    ```
-3. The API will be available at `http://localhost:8080`.
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-    ```bash
-    cd frontend
-    ```
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-3. Start the React application:
-    ```bash
-    npm start
-    ```
-4. The UI will be available at `http://localhost:3000`.
-
-### Connecting Frontend and Backend
-
-- The React frontend makes API calls to the Spring Boot backend (default: `http://localhost:8080`). Adjust CORS settings in the backend if necessary.
-
-## Customization
-
-- **Database:** Swap the H2 database for MySQL or PostgreSQL by updating `application.properties`.
-- **Environment Variables:** Manage secrets and deployment-specific settings using environment files.
-
-## Contributing
-
-Contributions are welcome! Feel free to fork the repository and submit pull requests.
-
-## License
-
-This project is licensed under the MIT License.
+ExpensePilot is a modern full-stack application for managing and tracking personal and business expenses. The backend is built with Spring Boot (Java & Maven), providing a REST API for all expense operations. The frontend dashboard is powered by Next.js (TypeScript), automatically generated and styled via [v0.app](https://v0.app) and deployed on Vercel, offering a beautiful, responsive UI
 
 ---
 
-**Enjoy using ExpensePilot to simplify your expense tracking!**
+## 🗂 Project Structure
+
+```
+ExpensePilot/
+├── backend/                  # Spring Boot Maven API
+│   ├── src/
+│   └── pom.xml
+├── expense-pilot-dashboard/  # Next.js (v0) frontend
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── styles/
+│   └── package.json
+└── README.md                 # This file
+```
+
+---
+
+## ✨ Features
+
+### Backend (Spring Boot)
+- **Expense Management**: Add, edit, delete, and view expenses via REST API
+- **Category Tracking**: Organize expenses under custom categories
+- **Database Agnostic**: Default MySQL
+
+### Frontend (Next.js by v0)
+- **Dashboard Overview**: Total income, expenses, net savings
+- **Transaction Management**: Add/view/manage transactions
+- **Category Breakdown**: Charts show spending by category
+- **Real-Time Data**: Fetches live data from backend API, with offline fallback
+
+---
+
+## 🚀 Tech Stack
+
+### Backend
+- Spring Boot, Java 17+
+- Maven
+- Spring Data JPA
+- RESTful API (`/api/expense`, `/api/expenses`)
+- H2 (default), MySQL/PostgreSQL (optional)
+
+### Frontend
+- Next.js 14 (App Router)
+- TypeScript
+- Radix UI primitives, Lucide React icons
+- Recharts for charts
+- React Hook Form + Zod for validation
+- next-themes for theming
+- v0.app for UI generation
+- Deployed on Vercel
+
+---
+
+## ⚡️ Getting Started
+
+### Backend
+
+#### Prerequisites
+- Java 17+
+- Maven
+
+#### Setup
+```bash
+cd backend
+mvn spring-boot:run
+```
+- API available at `http://localhost:8080/api`
+
+### Frontend
+
+#### Prerequisites
+- Node.js 18+
+- npm or pnpm
+- Git
+
+#### Setup
+```bash
+git clone https://github.com/chetanb-11/expense-pilot-dashboard.git
+cd expense-pilot-dashboard
+npm install
+npm run dev
+```
+- UI available at `http://localhost:3000`
+
+---
+
+## 🔗 API Integration
+
+The Next.js dashboard integrates with the backend via:
+
+- `GET /api/expenses` – fetch all transactions
+- `POST /api/expense` – create new transaction
+- `PUT /api/expense/{id}` – update transaction
+- `DELETE /api/expense/{id}` – delete transaction
+
+Set your backend API URL in `.env.local`:
+```
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
+Fallback demo data included for offline/local development.
+
+---
+
+## 🔧 Customization
+
+- **Database**: To use MySQL/PostgreSQL, update `backend/src/main/resources/application.properties`
+- **Environment Variables**: Use `.env.local` for frontend and backend secrets
+- **Deployment**: Backend can run on any cloud/server; frontend deploys to Vercel (auto-sync with v0.app)
+
+---
+
+## 🧑‍💻 Contributing
+
+Pull requests, issues, and feature suggestions are welcome!
+- Fork, clone, and submit PRs for either backend or frontend
+
+---
+
+**Enjoy tracking your expenses with ExpensePilot!**
