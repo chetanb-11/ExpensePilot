@@ -14,17 +14,12 @@ public class ExpenseController {
 
     @Autowired
     private ExpenseService expenseService;
-<<<<<<< HEAD
-
 
     @GetMapping("/")
     public String greet(){
         return "Hello World! Welcome to my ExpensePilot";
     }
 
-=======
-    
->>>>>>> 63bb8f72c5e0fb3959697b973f6459c1a523e0cd
     @PostMapping("/expense")
     public void createExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
