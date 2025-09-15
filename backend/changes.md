@@ -26,5 +26,10 @@
 - Redeploy to Render.com. The app should now start correctly and respond to health checks, resolving the 502 Bad Gateway error.
 - If you use a database in production, update datasource settings accordingly.
 
+## 7. Whitelabel Error Page (404 Not Found)
+- After deployment, accessing the root URL `/` returns a Whitelabel Error Page (404 Not Found).
+- This is because there is no explicit mapping for `/` in the controller. The greeting endpoint is mapped to `/api/`.
+- To resolve this, added a root endpoint (`@GetMapping("/")`) in `ExpenseController.java` that returns a simple greeting message, so the root URL responds with HTTP 200 and a message instead of a 404 error.
+
 ---
 **If you need more details or want to document additional changes, update this file accordingly.**
