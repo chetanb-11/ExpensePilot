@@ -52,8 +52,5 @@ public class ExpenseController {
     }
     
 
-    @GetMapping("/health")
-    public ResponseEntity<String> health() {
-        return new ResponseEntity<>("OK", HttpStatus.OK);
-    }
+    
 }
