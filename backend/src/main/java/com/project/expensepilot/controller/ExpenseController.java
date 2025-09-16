@@ -40,6 +40,16 @@ public class ExpenseController {
         return new ResponseEntity<>(HttpStatus.valueOf(404));
     }
 
+    @PutMapping("/expense/{id}")
+    public ResponseEntity<Expense> updateExpense(@PathVariable int id, @RequestBody Expense updatedExpense) {
+        Expense existingExpense = expenseService.getExpenseById(id);
+        if (existingExpense != null) {
+            updatedExpense.setId(id);
+            Expense savedExpense = expenseService.updateExpense(updatedExpense);
+            return new ResponseEntity<>(savedExpense, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     
 
     @GetMapping("/health")
