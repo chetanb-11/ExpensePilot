@@ -1,12 +1,32 @@
-INSERT INTO expense (amount, type, category, description, date) VALUES (1000.00, 'Income', 'Salary', 'August Salary', '2025-09-01');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Rent', 'Rent for September', '2025-09-01');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Utilities', 'Internet Bill', '2025-09-02');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( 1000.00, 'Income', 'Freelance', 'Web design project payment', '2025-09-03');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Groceries', 'Weekly grocery run', '2025-09-03');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Utilities', 'Electricity Bill for August', '2025-09-04');
-INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Food', 'Dinner at a local restaurant', '2025-09-05');
-INSERT INTO expense (amount, type, category, description, date) VALUES (1000.00, 'Income', 'Investments', 'Dividend from stocks', '2025-09-05');
-INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Transport', 'Fuel for car', '2025-09-06');
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (1200.00, 'Income', 'Salary', 'September Salary', '2025-10-01');
 
-INSERT INTO expense (amount, type, category, description, date) VALUES (-100.00, 'Expense', 'Entertainment', 'Movie tickets for two', '2025-09-06');
-INSERT INTO expense (amount, type, category, description, date) VALUES ( -100.00, 'Expense', 'Shopping', 'Bought new shoes', '2025-09-06');
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-500.00, 'Expense', 'Rent', 'Apartment rent for October', '2025-10-01');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-75.50, 'Expense', 'Utilities', 'Internet and phone bill', '2025-10-02');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (450.00, 'Income', 'Freelance', 'Mobile app development payment', '2025-10-03');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-220.30, 'Expense', 'Groceries', 'Monthly grocery shopping', '2025-10-03');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-150.00, 'Expense', 'Utilities', 'Electricity Bill for September', '2025-10-04');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-60.00, 'Expense', 'Food', 'Dinner at Italian restaurant', '2025-10-05');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (300.00, 'Income', 'Investments', 'Stock dividend payout', '2025-10-05');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-90.00, 'Expense', 'Transport', 'Fuel refill', '2025-10-06');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-40.00, 'Expense', 'Entertainment', 'Concert ticket', '2025-10-06');
+
+INSERT INTO expense (amount, type, category, description, date) 
+VALUES (-180.00, 'Expense', 'Shopping', 'Bought new jacket', '2025-10-07');
