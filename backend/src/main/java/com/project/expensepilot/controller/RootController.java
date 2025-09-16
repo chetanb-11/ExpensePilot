@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RootController {
 
-    
-   
+     @GetMapping("/")
+    public ResponseEntity<String> root() {
+        return new ResponseEntity<>("ExpensePilot backend is running! API endpoints available at /api/", HttpStatus.OK);
+    }
 
     @GetMapping("/status")
     public ResponseEntity<String> status() {
