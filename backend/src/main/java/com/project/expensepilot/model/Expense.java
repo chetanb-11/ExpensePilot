@@ -19,6 +19,5 @@ public class Expense {
     private String category;
     private String description;
     
-    private String date; // Ideally, use LocalDate for date representation
 
 }
